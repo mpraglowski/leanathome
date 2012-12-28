@@ -1,0 +1,71 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeFile="site.master.cs" Inherits="MobileMetro" %>
+<%@ Import Namespace="BlogEngine.Core" %>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+
+ <head id="Head1" runat="server">
+ 	<meta name = "viewport" content = "width = device-width" />
+    <link href="style.css" rel="stylesheet" type="text/css" />
+     <link rel="shortcut icon" href="~/themes/MetroLight/metro.ico" type="image/x-icon"/>
+ </head>
+
+ <body>
+<!-- BEGINN MAINWRAPPER -->
+<div id="mainWrapper">
+    <form id="Form1" runat="Server">
+	<!-- BEGIN WRAPPER -->
+    <div id="wrapper">
+		<!-- BEGIN HEADER -->
+        <div id="header">         
+            <div id="logo">
+                <p><a href="<%=Blog.CurrentInstance.AbsoluteWebRoot %>"><%=BlogSettings.Instance.Name %></a></p>
+                <span><%=BlogSettings.Instance.Description %></span>
+            </div>
+
+            <table id="toptiles" style="left: 0px; top: 86px; width: 394px; height: 204px">
+                <tr>
+                    <td>&nbsp;</td>
+                    <td class="bluetile desktop"><blog:MobileThemeSwitch ShowRegularSiteText="<span>Desktop ver</span>" runat="server" />
+                    <td>&nbsp;</td>
+                    <td class="bluetile contact"><a href="<%=Utils.AbsoluteWebRoot %>contact.aspx"><span><%=Resources.labels.contact %></span></a></td>
+                </tr>
+                <tr>
+                    <td class="bluetile archive"><a href="<%=Utils.AbsoluteWebRoot%>archive.aspx"><span><%=Resources.labels.archive%></span></a></td>
+                    <td class="bluetile facebook"><a href="#"><span>Facebook</span></a></td>
+                    <td class="bluetile twitter"><a href="#"><span>Twitter</span></a></td>
+                    <td>&nbsp;</td>
+                </tr>
+            </table>
+
+        </div>
+        <!-- END HEADER -->
+		<!-- BEGIN CONTENT -->
+		<div id="content"> 
+	        <div id="colLeft">
+                <asp:ContentPlaceHolder ID="cphBody" runat="server" />            
+			</div>
+		</div>
+	    <!-- END CONTENT -->
+        <div id="footer">
+            <ul>
+                <% if (Security.IsAuthenticated){%>
+                <li><a href="<%=Blog.CurrentInstance.RelativeWebRoot %>account/logout.cshtml"><%=Resources.labels.logoff %></a></li>
+                <%}else{%>
+                <li><a href="<%=Blog.CurrentInstance.RelativeWebRoot %>account/login.aspx"><%=Resources.labels.login %></a></li>
+                <%}%>
+                
+            </ul>
+        </div>
+
+        <div id="copyright">
+            <span>&copy; <%=DateTime.Now.ToString("yyyy")%> <%=BlogSettings.Instance.Name %></span><br />
+            <span>Powered by <a href="http://dotnetblogengine.net">BlogEngine.NET</a> <%=BlogSettings.Instance.Version() %></span>
+        </div>
+	</div>
+    <!-- END WRAPPER --> 
+    </form>
+</div>
+<!-- END MAINWRAPPER -->
+</body>
+</html>
